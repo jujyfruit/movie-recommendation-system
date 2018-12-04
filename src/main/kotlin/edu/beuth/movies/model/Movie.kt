@@ -2,9 +2,9 @@ package edu.beuth.movies.model
 
 import javax.persistence.*
 
-@Entity
+@Entity(name = "movies")
 class Movie(
         val name: String,
-        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        @Id
         val id: Long
 )

@@ -5,9 +5,9 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-@Entity
+@Entity(name = "genres")
 class Genre(
         val name: String,
-        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        @Id
         val id: Long
 )

@@ -2,9 +2,9 @@ package edu.beuth.movies.model
 
 import javax.persistence.*
 
-@Entity
+@Entity(name="tags")
 class Tag(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        @Id
         val id: Long,
         val name: String) {
 

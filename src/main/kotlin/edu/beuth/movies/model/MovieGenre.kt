@@ -2,14 +2,14 @@ package edu.beuth.movies.model
 
 import javax.persistence.*
 
-@Entity
+@Entity(name="movie_genres")
 class MovieGenre(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        @Id
         val id: Long) {
     @ManyToOne
     lateinit var genre: Genre
 
-    @ManyToMany
+    @ManyToOne
     lateinit var movie: Movie
 
 }
