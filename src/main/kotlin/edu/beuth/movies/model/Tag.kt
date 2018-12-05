@@ -6,8 +6,4 @@ import javax.persistence.*
 class Tag(
         @Id
         val id: Long,
-        val name: String) {
-
-    @ManyToOne
-    lateinit var movie: Movie
-}
+        val name: String)
