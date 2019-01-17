@@ -13,7 +13,7 @@ buildscript {
 		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-noarg:${kotlinVersion}")
-		}
+	}
 }
 
 apply plugin: 'kotlin'
@@ -51,7 +51,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
-	compile group: 'org.postgresql', name: 'postgresql', version: '9.3-1100-jdbc4'
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
 	compile 'org.springframework.boot:spring-boot-starter-web'
 
+	compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.4.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.2.RELEASE'
 }
