@@ -1,0 +1,18 @@
+// protoc -I . recommender.proto --java_out=plugins=grpc:.
+syntax = "proto3";
+package pb;
+
+option java_package = "edu.beuth.movies.services.recommender.pb";
+
+
+message RecommendMoviesRequest {
+    repeated string reference_movies = 1;
+}
+
+message RecommendMoviesResponse {
+    repeated string recommended_movies = 1;
+}
+
+service MovieRecommender {
+    rpc recommend_movies (RecommendMoviesRequest) returns (RecommendMoviesResponse);
+}
