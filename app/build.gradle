@@ -58,13 +58,11 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-web'
 
 	compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.4.RELEASE'
+	compile group: 'io.github.lognet', name: 'grpc-spring-boot-starter', version: '3.0.0'
+
+	compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.11.RELEASE'
+	compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '2.1.2.RELEASE'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.2.RELEASE'
-	compile 'io.grpc:grpc-netty-shaded:1.18.0'
-	compile 'io.grpc:grpc-protobuf:1.18.0'
-	compile 'io.grpc:grpc-stub:1.18.0'
-	compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.6.1'
-	compile group: 'io.grpc', name: 'grpc-protobuf', version: '1.17.1'
-	compile group: 'io.grpc', name: 'protoc-gen-grpc-java', version: '1.17.1', ext: 'pom'
 }
 
 protobuf {

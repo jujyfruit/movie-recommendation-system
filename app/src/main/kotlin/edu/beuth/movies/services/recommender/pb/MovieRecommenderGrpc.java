@@ -11,39 +11,39 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.9.1)",
-    comments = "Source: pb/recommender.proto")
+    comments = "Source: recommender.proto")
 public final class MovieRecommenderGrpc {
 
   private MovieRecommenderGrpc() {}
 
-  public static final String SERVICE_NAME = "MovieRecommender";
+  public static final String SERVICE_NAME = "pb.MovieRecommender";
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   @java.lang.Deprecated // Use {@link #getRecommendMoviesMethod()} instead. 
-  public static final io.grpc.MethodDescriptor<Recommender.RecommendMoviesRequest,
-      Recommender.RecommendMoviesResponse> METHOD_RECOMMEND_MOVIES = getRecommendMoviesMethod();
+  public static final io.grpc.MethodDescriptor<edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest,
+      edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse> METHOD_RECOMMEND_MOVIES = getRecommendMoviesMethod();
 
-  private static volatile io.grpc.MethodDescriptor<Recommender.RecommendMoviesRequest,
-      Recommender.RecommendMoviesResponse> getRecommendMoviesMethod;
+  private static volatile io.grpc.MethodDescriptor<edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest,
+      edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse> getRecommendMoviesMethod;
 
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static io.grpc.MethodDescriptor<Recommender.RecommendMoviesRequest,
-      Recommender.RecommendMoviesResponse> getRecommendMoviesMethod() {
-    io.grpc.MethodDescriptor<Recommender.RecommendMoviesRequest, Recommender.RecommendMoviesResponse> getRecommendMoviesMethod;
+  public static io.grpc.MethodDescriptor<edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest,
+      edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse> getRecommendMoviesMethod() {
+    io.grpc.MethodDescriptor<edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest, edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse> getRecommendMoviesMethod;
     if ((getRecommendMoviesMethod = MovieRecommenderGrpc.getRecommendMoviesMethod) == null) {
       synchronized (MovieRecommenderGrpc.class) {
         if ((getRecommendMoviesMethod = MovieRecommenderGrpc.getRecommendMoviesMethod) == null) {
           MovieRecommenderGrpc.getRecommendMoviesMethod = getRecommendMoviesMethod = 
-              io.grpc.MethodDescriptor.<Recommender.RecommendMoviesRequest, Recommender.RecommendMoviesResponse>newBuilder()
+              io.grpc.MethodDescriptor.<edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest, edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "MovieRecommender", "recommend_movies"))
+                  "pb.MovieRecommender", "recommend_movies"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  Recommender.RecommendMoviesRequest.getDefaultInstance()))
+                  edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  Recommender.RecommendMoviesResponse.getDefaultInstance()))
+                  edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new MovieRecommenderMethodDescriptorSupplier("recommend_movies"))
                   .build();
           }
@@ -81,8 +81,8 @@ public final class MovieRecommenderGrpc {
 
     /**
      */
-    public void recommendMovies(Recommender.RecommendMoviesRequest request,
-        io.grpc.stub.StreamObserver<Recommender.RecommendMoviesResponse> responseObserver) {
+    public void recommendMovies(edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest request,
+        io.grpc.stub.StreamObserver<edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getRecommendMoviesMethod(), responseObserver);
     }
 
@@ -92,8 +92,8 @@ public final class MovieRecommenderGrpc {
             getRecommendMoviesMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                Recommender.RecommendMoviesRequest,
-                Recommender.RecommendMoviesResponse>(
+                edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest,
+                edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse>(
                   this, METHODID_RECOMMEND_MOVIES)))
           .build();
     }
@@ -119,8 +119,8 @@ public final class MovieRecommenderGrpc {
 
     /**
      */
-    public void recommendMovies(Recommender.RecommendMoviesRequest request,
-        io.grpc.stub.StreamObserver<Recommender.RecommendMoviesResponse> responseObserver) {
+    public void recommendMovies(edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest request,
+        io.grpc.stub.StreamObserver<edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getRecommendMoviesMethod(), getCallOptions()), request, responseObserver);
     }
@@ -146,7 +146,7 @@ public final class MovieRecommenderGrpc {
 
     /**
      */
-    public Recommender.RecommendMoviesResponse recommendMovies(Recommender.RecommendMoviesRequest request) {
+    public edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse recommendMovies(edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest request) {
       return blockingUnaryCall(
           getChannel(), getRecommendMoviesMethod(), getCallOptions(), request);
     }
@@ -172,8 +172,8 @@ public final class MovieRecommenderGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Recommender.RecommendMoviesResponse> recommendMovies(
-        Recommender.RecommendMoviesRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse> recommendMovies(
+        edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getRecommendMoviesMethod(), getCallOptions()), request);
     }
@@ -199,8 +199,8 @@ public final class MovieRecommenderGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_RECOMMEND_MOVIES:
-          serviceImpl.recommendMovies((Recommender.RecommendMoviesRequest) request,
-              (io.grpc.stub.StreamObserver<Recommender.RecommendMoviesResponse>) responseObserver);
+          serviceImpl.recommendMovies((edu.beuth.movies.services.recommender.pb.RecommendMoviesRequest) request,
+              (io.grpc.stub.StreamObserver<edu.beuth.movies.services.recommender.pb.RecommendMoviesResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -224,7 +224,7 @@ public final class MovieRecommenderGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return Recommender.getDescriptor();
+      return edu.beuth.movies.services.recommender.pb.Recommender.getDescriptor();
     }
 
     @java.lang.Override

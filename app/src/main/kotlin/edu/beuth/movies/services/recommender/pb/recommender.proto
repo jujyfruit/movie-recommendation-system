@@ -3,7 +3,7 @@ syntax = "proto3";
 package pb;
 
 option java_package = "edu.beuth.movies.services.recommender.pb";
-
+option java_multiple_files = true;
 
 message RecommendMoviesRequest {
     repeated string reference_movies = 1;
