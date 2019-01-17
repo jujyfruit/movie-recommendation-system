@@ -1,8 +1,10 @@
-package edu.beuth.movies.model
+package edu.beuth.movies.models
 
-import javax.persistence.*
+import javax.persistence.Id
+import javax.persistence.ManyToOne
+import javax.persistence.Table
 
-@Entity(name="movies_tags")
+@Table(schema = "movies", name = "movies_tags")
 class MovieTag(
         @Id
         val id: Long) {

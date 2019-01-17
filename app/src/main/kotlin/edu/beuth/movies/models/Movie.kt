@@ -1,8 +1,8 @@
-package edu.beuth.movies.model
+package edu.beuth.movies.models
 
 import javax.persistence.*
 
-@Entity(name = "movies")
+@Table(schema = "movies", name = "movies")
 class Movie(
         val name: String,
         @Id
