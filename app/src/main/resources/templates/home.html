@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <!--<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/static/js/home.js">-->
@@ -17,7 +17,11 @@
 <body>
     <p th:text="${name}"/>
 
-    <div id="select-container">
-    </div>
+    <select id="select-container" name="referenceMovies" multiple="multiple" style="width: 400px">
+    </select>
+
+    <button id="get-recommendations">Get recommendations</button>
+
+    <div id="recommendations"></div>
 </body>
 </html>
