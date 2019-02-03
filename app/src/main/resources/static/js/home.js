@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log('ready');
     var pageSize = 20;
 
     $('#select-container').select2({
@@ -54,5 +53,51 @@ $(document).ready(function () {
             var $div = $("<div>", {text: recommendedMovies[i]});
             $recommendations.append($div);
         }
+    }
+
+
+    var theMovieDbToken, theMovieDbSessionId;
+
+    $('#the-movie-db').click(function () {
+        if (!theMovieDbSessionId) {
+            $.ajax({
+                url: '/api/getMovieDbAllowAccess',
+                success: function (data) {
+                    theMovieDbToken = data.token;
+                    handleGetMovieDbAllowAccessUrlSuccess(data.url);
+                }
+            });
+        }
+    });
+
+    function handleGetMovieDbAllowAccessUrlSuccess(url) {
+        window.open(url, '_blank');
+        var interval = setInterval(function () {
+            $.ajax({
+                url: '/api/getMovieDbSessionId',
+                data: {
+                    token: theMovieDbToken
+                },
+                success: function (sessionId) {
+                    console.log('session id', sessionId);
+                    if (sessionId) {
+                        getFavouriteMovies(sessionId);
+                        clearInterval(interval);
+                    }
+                }
+            });
+        }, 2000);
+    }
+
+    function getFavouriteMovies(sessionId) {
+        $.ajax({
+            url: '/api/getMovieDbFavouriteMovies',
+            data: {
+                sessionId: sessionId
+            },
+            success: function (movies) {
+                console.log('favourite movies', movies)
+            }
+        });
     }
 });
