@@ -1,9 +1,9 @@
 package edu.beuth.movies.views.home
 
 import edu.beuth.movies.models.Movie
-import edu.beuth.movies.services.MovieDbAllowAccessDetails
+import edu.beuth.movies.models.MovieDbAllowAccessDetails
 import edu.beuth.movies.services.MovieService
-import edu.beuth.movies.services.TheMovieDbService
+import edu.beuth.movies.services.impl.TheMovieDbServiceImpl
 import edu.beuth.movies.services.recommender.MovieRecommender
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 @Controller
 class HomeController(private val movieRecommender: MovieRecommender,
                      private val movieService: MovieService,
-                     private val theMovieDbService: TheMovieDbService) {
+                     private val theMovieDbService: TheMovieDbServiceImpl) {
 
     @GetMapping("/")
     fun home(): String {
