@@ -16,7 +16,7 @@ import java.net.URI
 
 
 @Service
-class TheMovieDbServiceImpl: TheMovieDbService {
+class TheMovieDbServiceImpl : TheMovieDbService {
     @Value("\${themoviedb.apikey}")
     private val apiKey: String? = null
 
@@ -56,15 +56,33 @@ class TheMovieDbServiceImpl: TheMovieDbService {
     override fun getFavouriteMovies(sessionId: String): List<String> {
         val accountId = getAccountId(sessionId)
 
+        var page = 1
+        var favouriteMoviesPaged: FavouriteMoviesResponse? = getFavouriteMoviesPaged(sessionId, accountId, page)
+                ?: return emptyList()
+
+        val favouriteMovies = arrayListOf<String>()
+        favouriteMovies.addAll(favouriteMoviesPaged!!.getMovieTitles())
+
+        while (page < favouriteMoviesPaged!!.total_pages) {
+            page++
+            favouriteMoviesPaged = getFavouriteMoviesPaged(sessionId, accountId, page) ?: return favouriteMovies
+
+            favouriteMovies.addAll(favouriteMoviesPaged.getMovieTitles())
+        }
+
+        return favouriteMovies
+    }
+
+    private fun getFavouriteMoviesPaged(sessionId: String, accountId: Int?, page: Int): FavouriteMoviesResponse? {
+
         val responseType = object : ParameterizedTypeReference<FavouriteMoviesResponse>() {}
 
         val request = RequestEntity.get(
-                URI.create(getApiPath("/account/$accountId/favorite/movies") + "&session_id=$sessionId"))
+                URI.create(getApiPath("/account/$accountId/favorite/movies") + "&session_id=$sessionId&page=$page"))
                 .accept(MediaType.APPLICATION_JSON).build()
 
-        val response = client.exchange(request, responseType).body ?: return listOf()
+        return client.exchange(request, responseType).body
 
-        return response.results.map { it.original_title }
     }
 
     private fun getAccountId(sessionId: String): Int? {
