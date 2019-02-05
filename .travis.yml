@@ -1,7 +1,7 @@
 language: java
 
 env:
-  - SERVER_IP_ADDRESS=35.246.151.112
+- SERVER_IP_ADDRESS=35.246.151.112
 
 script:
 - cd app
@@ -23,4 +23,5 @@ before_install:
 - chmod 600 ./deploy_key
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
+- ls -lah
 - ssh -i ./deploy_key ifki@$SERVER_IP_ADDRESS pwd
