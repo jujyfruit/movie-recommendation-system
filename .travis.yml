@@ -1,14 +1,26 @@
 language: java
+
+env:
+  - SERVER_IP_ADDRESS=35.246.151.112
+
 script:
 - cd app
 - ./gradlew build -x test
+
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
 cache:
   directories:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
+
 before_install:
 - openssl aes-256-cbc -K $encrypted_ffe0def6523d_key -iv $encrypted_ffe0def6523d_iv
   -in deploy_key.enc -out ./deploy_key -d
+- eval "$(ssh-agent -s)"
+- chmod 600 ./deploy_key
+- echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- ssh-add ./deploy_key
+- ssh -i ./deploy_key ifki@$SERVER_IP_ADDRESS pwd
