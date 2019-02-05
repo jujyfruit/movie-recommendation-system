@@ -1,6 +1,7 @@
 language: java
 
 script:
+- cd app
 - ./gradlew build -x test
 
 before_cache:
