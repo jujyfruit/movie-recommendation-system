@@ -6,9 +6,10 @@ env:
 script:
 - cd app
 - ./gradlew build -x test
+- cd..
 - ls -lah
-- scp ./movie-recommendation-system/app/build/libs/movies-0.0.1-SNAPSHOT.jar ifki@$SERVER_IP_ADDRESS:/opt/movies-recommendation/app
-- scp -a ./movie-recommendation-system/analytics/. ifki@$SERVER_IP_ADDRESS:/opt/movies-recommendation/analytics
+- scp ./app/build/libs/movies-0.0.1-SNAPSHOT.jar ifki@$SERVER_IP_ADDRESS:/opt/movies-recommendation/app
+- scp -r ./analytics/. ifki@$SERVER_IP_ADDRESS:/opt/movies-recommendation/analytics
 - ssh ifki@$SERVER_IP_ADDRESS -c "sudo /etc/init.d/movies-recommendation restart && sudo /etc/init.d/movies-analytics restart"
 
 before_cache:
