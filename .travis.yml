@@ -3,9 +3,16 @@ language: java
 env:
 - SERVER_IP_ADDRESS=35.246.151.112
 
+addons:
+  sonarcloud:
+    organization: "itrajanovska-github"
+    token:
+      secure: o0RFrtxiyLu90NxNEM62jUwNNvg4sCW2G3KB6oEhwJYRl9BSk6xqqwnnDL0evAfZgMDZ8yM5WXh1iyIWyCc5aj2zxuG76IFtIRhGQLf1GQXITjyYrcz67kcvXupaI/gQnR7BB8mqq8zZVnMOh/ULgY0z62LvYTLcmNsuZs1sgpOBNol5ecKgVvvLs/jGUl0fJrvnRgA3ZKKgO0CVudMmdwkZyDzzf7CUhLH5YkKQRmzVWMPYGIbO9iPVyYl7zRaJHvrD6lI32y/tPRxVpsz56eE+J61KSz5E72DHCxKquhkZ8LVpAxiZ7tCNnGDyF9S0RhMcqX/4DrpuzBJLrZyn0DUsM3OY7ma7zMZgW4QmMtvpHrr1z/lXAP7PDR8/u06/V6BDl10y3fk3PIT7Mn9v/C80R3TxQli66XK/vnrb2V8wR3vyREeBcAbWk8u0D8KJWTFD4VzN75YlOA4+NUZaM1QCVT3hz98r9OS0N697tZ32yjkC+wC/9R4tXDuE06BUeeOjjKPwzpU4X8n1BgGMmm0XBOf2Jg3v41hBs5Uy8ZSgcvpMw/g4IsZB1rtc97203SNLDscTh0AOy0jNwdPBSRyO2mzZUpI8fKJxraTDJ/hlgfX+Nby9epqK9gP1IH1t0/aCzj5YmZQpBd+eYge2Zrxa2h4NEPrayIpgTTPxevE= # encrypted value of your token
+
 script:
 - cd app
 - ./gradlew build -x test
+- sonar-scanner
 - cd ..
 - ls -lah
 - scp ./app/build/libs/movies-0.0.1-SNAPSHOT.jar ifki@$SERVER_IP_ADDRESS:/opt/movies-recommendation/app
@@ -21,7 +28,7 @@ cache:
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
-  
+
 before_install:
 - openssl aes-256-cbc -K $encrypted_ffe0def6523d_key -iv $encrypted_ffe0def6523d_iv
   -in deploy_key.enc -out ./deploy_key -d
