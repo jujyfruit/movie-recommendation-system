@@ -10,7 +10,8 @@ script:
 - ls -lah
 - scp ./app/build/libs/movies-0.0.1-SNAPSHOT.jar ifki@$SERVER_IP_ADDRESS:/opt/movies-recommendation/app
 - scp -r ./analytics/. ifki@$SERVER_IP_ADDRESS:/opt/movies-recommendation/analytics
-- ssh ifki@$SERVER_IP_ADDRESS "sudo /etc/init.d/movies-recommendation restart && sudo /etc/init.d/movies-analytics restart"
+- ssh ifki@$SERVER_IP_ADDRESS "sudo /etc/init.d/movies-recommendation restart && sudo
+  /etc/init.d/movies-analytics restart"
 
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -18,8 +19,8 @@ before_cache:
 
 cache:
   directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_ffe0def6523d_key -iv $encrypted_ffe0def6523d_iv
