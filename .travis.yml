@@ -11,6 +11,7 @@ addons:
 
 script:
 - cd app
+- ./gradlew test
 - ./gradlew build -x test
 - cd ..
 - sonar-scanner
