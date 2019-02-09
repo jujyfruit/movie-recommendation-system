@@ -20,6 +20,7 @@
         body {
             margin: 0;
             background-color: #f7f7f7;
+            font-family: Raleway;
         }
 
         .headers-row {
@@ -32,7 +33,6 @@
             border-radius: 6px;
             background-color: #dbdfe5;
             opacity: 0.5;
-            font-family: Raleway sans-serif;
             font-size: 18px;
             font-weight: bold;
             text-align: center;
@@ -103,10 +103,28 @@
             justify-content: center;
         }
 
+        .icon-box.small {
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+        }
+
         .icon-box > i {
             font-size: 32px;
             text-align: center;
             color: #ffffff;
+        }
+
+        .icon-box.small > i {
+            font-size: 21.3px;
+        }
+
+        .icon-box > img {
+            width: 33px;
+        }
+
+        .icon-box.small > img {
+            width: 25px;
         }
 
         .d-flex {
@@ -122,15 +140,17 @@
             display: flex;
             align-items: center;
             margin-left: 18px;
+
+            width: 600px;
         }
 
-        .import-movies-selection {
+        .import-movies-selection, #the-movie-db {
             margin-left: 78px;
             position: relative;
         }
 
         .select2-selection__placeholder {
-            padding-left: 25px;
+            padding-left: 35px;
 
             font-size: 20px;
             font-weight: 600;
@@ -142,12 +162,24 @@
             color: #abb0b7;
 
             position: absolute;
-            left: 0;
+            left: 15px;
+            top: 15px;
         }
 
-        .selection, .select2-selection, .select2-selection__rendered {
+        .selection, .select2-selection, .select2-selection__rendered, .select2-search__field {
             width: 430px !important;
             height: 50px !important;
+        }
+
+        .select2-results {
+            width: 430px !important;
+        }
+
+        .select2-selection {
+            border-radius: 6px;
+            box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.17);
+            background-color: #ffffff;
+            border: none;
         }
 
         .select2-selection__rendered {
@@ -159,6 +191,137 @@
             display: none;
         }
 
+        .select2-search__field {
+            padding: 0 !important;
+            margin-left: -4px;
+            margin-top: -4px;
+            margin-bottom: -4px;
+
+            font-size: 20px;
+        }
+
+        .import-movies-selection + .d-flex {
+            margin-top: 50px;
+        }
+
+        *:focus {
+            outline: none !important;
+        }
+
+        button {
+            height: 50px;
+            border-radius: 6px;
+            background-color: #ffd121;
+
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3b62;
+            border: none;
+            margin-top: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            cursor: pointer;
+            filter: brightness(90%);
+        }
+
+        #the-movie-db {
+            width: 196px;
+        }
+
+        .select-movies-container + .explanation-header {
+            margin-top: 60px;
+            margin-bottom: 25px;
+        }
+
+        table {
+            border-radius: 6px;
+            box-shadow: 0 0 18px 0 rgba(0, 0, 0, 0.11);
+            background-color: #ffffff;
+            border-collapse: collapse;
+
+            width: 100%;
+        }
+
+        th, tr {
+            height: 55px;
+        }
+
+        td, th {
+            border: 0.5px solid #e4e4e4;
+        }
+
+        td:nth-child(1), th:nth-child(1) {
+            width: 40%;
+        }
+
+        td:nth-child(2), th:nth-child(2) {
+            width: 20%;
+        }
+
+        td:nth-child(3), th:nth-child(3) {
+            width: 20%;
+        }
+
+        td:nth-child(4), th:nth-child(4) {
+            width: 20%;
+        }
+
+        th {
+            background-color: #f7f7f7;
+        }
+
+        th > div {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3b62;
+        }
+
+        td > div {
+            font-size: 16px;
+            font-weight: 600;
+            color: #61656f;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        td > div.name-cell {
+            justify-content: flex-start;
+            padding-left: 20px;
+        }
+
+        #get-recommendations-container {
+            display: flex;
+            justify-content: flex-end;
+
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+
+        #get-recommendations {
+            width: 261px;
+        }
+
+        .delete-cell:hover {
+            cursor: pointer;
+            filter: brightness(90%);
+        }
+
+        .footer {
+            width: 100%;
+            height: 156px;
+            background-color: #e4e4e4;
+        }
+
+        #recommended-movies-container {
+            padding-bottom: 50px;
+        }
     </style>
 </head>
 <body>
@@ -177,44 +340,74 @@
     <div class="select-movies-container">
         <div class="d-flex">
             <div class="icon-box"><i class="fas fa-film"></i></div>
-            <div class="import-movies-explanation">Choose your favorite films from the database and move them into the
-                table.
+            <div class="import-movies-explanation">
+                Choose your favorite films from the database and move them into the table.
             </div>
         </div>
         <div class="import-movies-selection">
-            <select id="select-container" name="referenceMovies" style="width: 400px">
+            <select id="select-container" name="referenceMovies" style="width: 430px">
             </select>
             <i class="fas fa-search"></i>
         </div>
 
         <div class="d-flex">
-            <div class="icon-box"><i class="fas fa-film"></i></div>
-            <div class="import-movies-explanation">Choose your favorite films from the database and move them into the
-                table.
+            <div class="icon-box"><img th:src="@{/img/themoviedb-logo.png}"/></div>
+            <div class="import-movies-explanation">
+                Import your favorite movie libraries from The Movie DB and edit the list so it reflects your
+                preferences.
             </div>
         </div>
+        <button id="the-movie-db">Import films</button>
     </div>
 
     <h3 class="explanation-header">2. Filter the table and get the recommended film list</h3>
 
 
-    <button id="get-recommendations">Get recommendations</button>
-    <button id="the-movie-db">TheMovieDb</button>
-
     <table>
         <thead>
         <tr>
-            <th>Name</th>
+            <th>
+                <div>Name</div>
+            </th>
+            <th>
+                <div>Year</div>
+            </th>
+            <!--<th><div>Genre</div></th>-->
+            <th>
+                <div>Source</div>
+            </th>
+            <th>
+                <div>Remove</div>
+            </th>
         </tr>
         </thead>
-
         <tbody id="reference-movies-table-body">
+        </tbody>
+    </table>
+
+    <div id="get-recommendations-container">
+        <button id="get-recommendations">Get recommendations</button>
+    </div>
+</div>
+
+<div id="recommended-movies-container" class="tab-container">
+    <table>
+        <thead>
+        <tr>
+            <th>
+                <div>Name</div>
+            </th>
+            <th>
+                <div>Year</div>
+            </th>
+            <!--<th><div>Genre</div></th>-->
+        </tr>
+        </thead>
+        <tbody id="recommended-movies-table-body">
         </tbody>
     </table>
 </div>
 
-<div id="recommended-movies-container" class="tab-container">
-    <div id="recommendations"></div>
-</div>
+<div class="footer"></div>
 </body>
 </html>

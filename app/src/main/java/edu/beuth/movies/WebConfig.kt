@@ -15,6 +15,11 @@ class WebConfig : WebMvcConfigurer {
                 "/js/**")
                 .addResourceLocations(
                         "classpath:/static/js/")
+
+        registry.addResourceHandler(
+                "/img/**")
+                .addResourceLocations(
+                        "classpath:/static/img/")
     }
 
 }
