@@ -11,7 +11,7 @@ def get_data_titles():
 
 def add_user_data(user_id, movies):
     ts = int(time.time())
-    file = open("u.data", "a")
+    file = open("recommender/u.data", "a")
 
     for m_id in movies:
         file.write('{0}	{1}	{2}	{3}\n'.format(str(user_id), str(m_id), str(5), str(ts)))
@@ -21,7 +21,7 @@ def add_user_data(user_id, movies):
 
 def find_mapped_movies(movies):
     i_cols = get_data_titles()
-    items = pd.read_csv('u.item', sep='|', names=i_cols, encoding='latin-1')
+    items = pd.read_csv('recommender/u.item', sep='|', names=i_cols, encoding='latin-1')
     print(items[['movie title', 'movie id']].loc[items['movie title'].isin(movies)]['movie id'])
     return items[['movie title', 'movie id']].loc[items['movie title'].isin(movies)]['movie id'].tolist()
 
@@ -29,11 +29,11 @@ class DataPreparator:
 
     def __init__(self):
         self.r_cols = ['user_id', 'movie_id', 'rating', 'unix_timestamp']
-        self.ratings = pd.read_csv('u.data', sep='\t', names=self.r_cols, encoding='latin-1')
-        self.ratings_train = pd.read_csv('ua.base', sep='\t', names=self.r_cols, encoding='latin-1')
-        self.ratings_test = pd.read_csv('ua.test', sep='\t', names=self.r_cols, encoding='latin-1')
+        self.ratings = pd.read_csv('recommender/u.data', sep='\t', names=self.r_cols, encoding='latin-1')
+        self.ratings_train = pd.read_csv('recommender/ua.base', sep='\t', names=self.r_cols, encoding='latin-1')
+        self.ratings_test = pd.read_csv('recommender/ua.test', sep='\t', names=self.r_cols, encoding='latin-1')
         i_cols = get_data_titles()
-        self.items = pd.read_csv('u.item', sep='|', names=i_cols, encoding='latin-1')
+        self.items = pd.read_csv('recommender/u.item', sep='|', names=i_cols, encoding='latin-1')
         self.prepare_data()
 
     def prepare_data(self):
