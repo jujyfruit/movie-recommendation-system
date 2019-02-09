@@ -30,7 +30,7 @@ class MovieRecommenderGrpcClient : MovieRecommender {
 
     override fun getMovieRecommendations(referenceMovies: List<String>): List<String> {
         val request = RecommendMoviesRequest.newBuilder()
-                .addReferenceMovies("test")
+                .addAllReferenceMovies(referenceMovies)
                 .build()
 
         return blockingStub.recommendMovies(request).recommendedMoviesList

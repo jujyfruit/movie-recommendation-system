@@ -12,8 +12,8 @@ def get_data_titles():
 def add_user_data(user_id, movies):
     ts = int(time.time())
     file = open("recommender/u.data", "a")
-
-    for m_id in movies:
+    mapped_movies = find_mapped_movies(movies)
+    for m_id in mapped_movies:
         file.write('{0}	{1}	{2}	{3}\n'.format(str(user_id), str(m_id), str(5), str(ts)))
 
     file.close()
@@ -22,8 +22,14 @@ def add_user_data(user_id, movies):
 def find_mapped_movies(movies):
     i_cols = get_data_titles()
     items = pd.read_csv('recommender/u.item', sep='|', names=i_cols, encoding='latin-1')
-    print(items[['movie title', 'movie id']].loc[items['movie title'].isin(movies)]['movie id'])
+    print(items[['movie title', 'movie id']].loc[items['movie title'].isin(movies)]['movie id'].tolist())
     return items[['movie title', 'movie id']].loc[items['movie title'].isin(movies)]['movie id'].tolist()
+
+
+def map_id_to_movies(movies):
+    i_cols = get_data_titles()
+    items = pd.read_csv('recommender/u.item', sep='|', names=i_cols, encoding='latin-1')
+    return items[['movie title', 'movie id']].loc[items['movie id'].isin(movies)]['movie title'].tolist()
 
 class DataPreparator:
 

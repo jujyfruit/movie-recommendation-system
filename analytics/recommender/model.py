@@ -21,7 +21,7 @@ class Model:
         for line in self.dp.ratings.itertuples():
             self.data_matrix[int(line[1]) - 1, int(line[2]) - 1] = line[3]
 
-    def train_model(self, type_of_recommendation='popularity'):
+    def train_model(self, type_of_recommendation='item'):
 
         if type_of_recommendation == 'popularity':
             self.model = turicreate.popularity_recommender.create(self.train_data, user_id='user_id',
@@ -34,12 +34,3 @@ class Model:
 
     def predict(self, user_id):
         return self.model.recommend(users=[user_id], k=10)
-
-
-if __name__ == '__main__':
-    request = {'user_id': 711, 'movies': ['Toy Story (1995)', 'Brothers McMullen, The (1995)', 'Strange Days (1995)']}
-    add_user_data(request['user_id'], find_mapped_movies(request['movies']))
-    mm = Model()
-    mm.train_model()
-    movies = mm.predict(request['user_id'])
-    print(movies)
