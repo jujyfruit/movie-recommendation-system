@@ -1,10 +1,11 @@
 import grpc
 from time import sleep
 from concurrent import futures
-from recommender_pb2_grpc import add_MovieRecommenderServicer_to_server
-from recommender_servicer import MovieRecommenderServicer
+from grpc.recommender_pb2_grpc import add_MovieRecommenderServicer_to_server
+from grpc.recommender_servicer import MovieRecommenderServicer
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
+
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
@@ -17,7 +18,6 @@ def serve():
             sleep(_ONE_DAY_IN_SECONDS)
     except KeyboardInterrupt:
         server.stop(0)
-    print 'sdsdsdsds'
 
 
 if __name__ == '__main__':
