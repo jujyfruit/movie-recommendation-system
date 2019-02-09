@@ -5,18 +5,216 @@
     <title>Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script type="text/javascript" th:src="@{/js/home.js}"></script>
+
+    <link href="//fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        .headers-row {
+            display: flex;
+
+            margin-top: 45px;
+        }
+
+        .tab-header {
+            border-radius: 6px;
+            background-color: #dbdfe5;
+            opacity: 0.5;
+            font-family: Raleway sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #2c3b62;
+
+            padding-top: 18px;
+            padding-bottom: 18px;
+            width: 250px;
+        }
+
+        .tab-header:first-child {
+            margin-left: 90px;
+            margin-right: 15px;
+        }
+
+        .tab-header.selected {
+            color: #2c3b62;
+            background-color: #fff;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.1);
+            opacity: 1;
+        }
+
+        .tab-container {
+            display: none;
+
+            border-radius: 6px;
+            box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+
+            padding-left: 91px;
+            padding-right: 91px;
+            padding-top: 45px;
+        }
+
+        .tab-container.selected {
+            display: block;
+        }
+
+        .top-bar {
+            height: 90px;
+            width: 100%;
+            background-color: #2c3b62;
+        }
+
+        .explanation-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3b62;
+            margin-bottom: 25px;
+        }
+
+        .select-movies-container {
+            border-radius: 6px;
+            background-color: #f7f7f7;
+            padding: 40px 88px 50px 30px;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 60px;
+            background-color: #2c3b62;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-box > i {
+            font-size: 32px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .import-movies-explanation {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.33;
+            color: #303640;
+
+            display: flex;
+            align-items: center;
+            margin-left: 18px;
+        }
+
+        .import-movies-selection {
+            margin-left: 78px;
+            position: relative;
+        }
+
+        .select2-selection__placeholder {
+            padding-left: 25px;
+
+            font-size: 20px;
+            font-weight: 600;
+            color: #abb0b7 !important;
+        }
+
+        .fa-search {
+            font-size: 20px;
+            color: #abb0b7;
+
+            position: absolute;
+            left: 0;
+        }
+
+        .selection, .select2-selection, .select2-selection__rendered {
+            width: 430px !important;
+            height: 50px !important;
+        }
+
+        .select2-selection__rendered {
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        .select2-selection__arrow {
+            display: none;
+        }
+
+    </style>
 </head>
 <body>
-    <select id="select-container" name="referenceMovies" multiple="multiple" style="width: 400px">
-    </select>
+<div class="top-bar"></div>
+
+<div class="headers-row">
+    <div id="reference-movies-header" class="tab-header selected">Films inputs</div>
+    <div id="recommended-movies-header" class="tab-header">Recommendations</div>
+</div>
+
+
+<div id="reference-movies-container" class="tab-container selected">
+
+    <h3 class="explanation-header">1. Import your favorite films from both databases</h3>
+
+    <div class="select-movies-container">
+        <div class="d-flex">
+            <div class="icon-box"><i class="fas fa-film"></i></div>
+            <div class="import-movies-explanation">Choose your favorite films from the database and move them into the
+                table.
+            </div>
+        </div>
+        <div class="import-movies-selection">
+            <select id="select-container" name="referenceMovies" style="width: 400px">
+            </select>
+            <i class="fas fa-search"></i>
+        </div>
+
+        <div class="d-flex">
+            <div class="icon-box"><i class="fas fa-film"></i></div>
+            <div class="import-movies-explanation">Choose your favorite films from the database and move them into the
+                table.
+            </div>
+        </div>
+    </div>
+
+    <h3 class="explanation-header">2. Filter the table and get the recommended film list</h3>
+
 
     <button id="get-recommendations">Get recommendations</button>
     <button id="the-movie-db">TheMovieDb</button>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+        </thead>
+
+        <tbody id="reference-movies-table-body">
+        </tbody>
+    </table>
+</div>
+
+<div id="recommended-movies-container" class="tab-container">
     <div id="recommendations"></div>
+</div>
 </body>
 </html>

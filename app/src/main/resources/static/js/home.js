@@ -1,7 +1,9 @@
 $(document).ready(function () {
     var pageSize = 20;
 
-    $('#select-container').select2({
+    var $movieSelect = $('#select-container');
+
+    $movieSelect.select2({
         ajax: {
             url: "/api/movies",
             dataType: 'json',
@@ -99,5 +101,59 @@ $(document).ready(function () {
                 console.log('favourite movies', movies)
             }
         });
+    }
+
+
+    // page handling
+
+    var $referenceMoviesHeader = $('#reference-movies-header');
+    var $referenceMoviesContainer = $('#reference-movies-container');
+
+    var $recommendedMoviesHeader = $('#recommended-movies-header');
+    var $recommendedMoviesContainer = $('#recommended-movies-container');
+
+    var $referenceMoviesTableBody = $('#reference-movies-table-body');
+
+
+    $referenceMoviesHeader.click(function () {
+        $referenceMoviesHeader.addClass('selected');
+        $referenceMoviesContainer.addClass('selected');
+
+        $recommendedMoviesHeader.removeClass('selected');
+        $recommendedMoviesContainer.removeClass('selected');
+    });
+
+    $recommendedMoviesHeader.click(function () {
+        $referenceMoviesHeader.removeClass('selected');
+        $referenceMoviesContainer.removeClass('selected');
+
+        $recommendedMoviesHeader.addClass('selected');
+        $recommendedMoviesContainer.addClass('selected');
+    });
+
+
+    // reference movies container
+
+    var referencesMovies = [];
+
+    $movieSelect.on('select2:select', function (e) {
+        referencesMovies.push(e.params.data.text);
+        $movieSelect.val('').trigger('change');
+
+        refreshReferenceMoviesTable();
+    });
+
+    function refreshReferenceMoviesTable() {
+        $referenceMoviesTableBody.remove();
+
+        for (var i = 0; i < referencesMovies.length; i++) {
+
+            var $tr = $('<tr/>', {});
+            $('<td/>', {
+                text: referencesMovies[i]
+            }).appendTo($tr);
+
+            $tr.appendTo($referenceMoviesTableBody);
+        }
     }
 });
