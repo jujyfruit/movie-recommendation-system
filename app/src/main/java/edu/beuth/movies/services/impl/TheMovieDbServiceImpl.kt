@@ -37,7 +37,7 @@ class TheMovieDbServiceImpl : TheMovieDbService {
         return response["request_token"]!!
     }
 
-    override fun generateAllowAccess(token: String): MovieDbAllowAccessDetails {
+    override fun generateAllowAccessDetails(token: String): MovieDbAllowAccessDetails {
         return MovieDbAllowAccessDetails(token, "$websiteBaseUrl/authenticate/$token")
     }
 

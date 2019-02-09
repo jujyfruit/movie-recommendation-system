@@ -38,7 +38,7 @@ class HomeController(private val movieRecommender: MovieRecommender,
     @GetMapping("/api/getMovieDbAllowAccess")
     @ResponseBody
     fun getMovieDbAllowAccess(): MovieDbAllowAccessDetails {
-        return theMovieDbService.generateAllowAccess()
+        return theMovieDbService.generateAllowAccessDetails()
     }
 
     @GetMapping("/api/getMovieDbSessionId")
