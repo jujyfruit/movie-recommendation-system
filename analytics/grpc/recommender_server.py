@@ -1,8 +1,12 @@
+import sys
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+
 import grpc
 from time import sleep
 from concurrent import futures
-from grpc.recommender_pb2_grpc import add_MovieRecommenderServicer_to_server
-from grpc.recommender_servicer import MovieRecommenderServicer
+from recommender_pb2_grpc import add_MovieRecommenderServicer_to_server
+from recommender_servicer import MovieRecommenderServicer
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 

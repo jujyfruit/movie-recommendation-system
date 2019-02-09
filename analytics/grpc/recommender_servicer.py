@@ -1,9 +1,13 @@
-from grpc.recommender_pb2_grpc import *
+import sys
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+
+from recommender_pb2_grpc import *
 from recommender.data_preparator import *
 from random import randint
 from recommender.model import *
 
-from grpc.recommender_pb2 import RecommendMoviesResponse
+from recommender_pb2 import RecommendMoviesResponse
 
 
 class MovieRecommenderServicer(MovieRecommenderServicer):

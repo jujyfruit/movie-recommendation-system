@@ -1,6 +1,10 @@
+import sys
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+
 import grpc
-from grpc.recommender_pb2_grpc import MovieRecommenderStub
-from grpc.recommender_pb2 import RecommendMoviesRequest
+from recommender_pb2_grpc import MovieRecommenderStub
+from recommender_pb2 import RecommendMoviesRequest
 
 def run():
     # NOTE(gRPC Python Team): .close() is possible on a channel and should be
