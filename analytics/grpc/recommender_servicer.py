@@ -16,7 +16,8 @@ class MovieRecommenderServicer(MovieRecommenderServicer):
         self.model = Model()
 
     def recommend_movies(self, request, context):
-        add_user_data(randint(720, 1100), request['movies'])
+        user = randint(720, 1100)
+        add_user_data(user, request['reference_movies'])
         self.model.train_model()
-        movies = self.model.predict(request['user_id'])
+        movies = self.model.predict(user)
         return RecommendMoviesResponse(recommended_movies=movies)
