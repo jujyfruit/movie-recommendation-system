@@ -4,5 +4,5 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 class MovieDbAccount {
     @JsonProperty
-    var id: Int? = null
+    val id: Int? = null
 }

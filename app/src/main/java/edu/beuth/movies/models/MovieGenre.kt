@@ -11,9 +11,8 @@ class MovieGenre(
         @Id
         val id: Long) {
     @ManyToOne
-    lateinit var genre: Genre
+    val genre: Genre = Genre("", 0)
 
     @ManyToOne
-    lateinit var movie: Movie
-
+    val movie: Movie = Movie("", 0)
 }

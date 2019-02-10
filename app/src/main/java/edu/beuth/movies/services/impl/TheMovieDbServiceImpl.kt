@@ -37,7 +37,8 @@ class TheMovieDbServiceImpl : TheMovieDbService {
         return response["request_token"]!!
     }
 
-    override fun generateAllowAccessDetails(token: String): MovieDbAllowAccessDetails {
+    override fun generateAllowAccessDetails(tokenProvider: () -> String): MovieDbAllowAccessDetails {
+        val token = tokenProvider()
         return MovieDbAllowAccessDetails(token, "$websiteBaseUrl/authenticate/$token")
     }
 
@@ -56,21 +57,24 @@ class TheMovieDbServiceImpl : TheMovieDbService {
     override fun getFavouriteMovies(sessionId: String): List<String> {
         val accountId = getAccountId(sessionId)
 
-        var page = 1
-        var favouriteMoviesPaged: FavouriteMoviesResponse? = getFavouriteMoviesPaged(sessionId, accountId, page)
+        val favouriteMoviesPaged: FavouriteMoviesResponse? = getFavouriteMoviesPaged(sessionId, accountId, 1)
                 ?: return emptyList()
 
         val favouriteMovies = arrayListOf<String>()
         favouriteMovies.addAll(favouriteMoviesPaged!!.getMovieTitles())
 
-        while (page < favouriteMoviesPaged!!.total_pages) {
-            page++
-            favouriteMoviesPaged = getFavouriteMoviesPaged(sessionId, accountId, page) ?: return favouriteMovies
+        return collectAllFavouriteMovies(sessionId, accountId, favouriteMovies, favouriteMoviesPaged.total_pages, 2)
+    }
 
-            favouriteMovies.addAll(favouriteMoviesPaged.getMovieTitles())
+    private fun collectAllFavouriteMovies(sessionId: String, accountId: Int?, movies: List<String>,
+                                          totalPages: Int, page: Int): List<String> {
+        if (page >= totalPages) {
+            return listOf()
         }
 
-        return favouriteMovies
+        val favouriteMoviesPaged = getFavouriteMoviesPaged(sessionId, accountId, page) ?: return movies
+        val favouriteMovies = favouriteMoviesPaged.getMovieTitles()
+        return movies + favouriteMovies + collectAllFavouriteMovies(sessionId, accountId, movies, totalPages, page + 1)
     }
 
     private fun getFavouriteMoviesPaged(sessionId: String, accountId: Int?, page: Int): FavouriteMoviesResponse? {
