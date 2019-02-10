@@ -81,6 +81,10 @@ fun main(args: Array<String>) {
             subject = "pdds"
             grade = 1.3
         }
+        grade {
+            subject = "math"
+            grade = 1.0
+        }
     }
 
     print(student)
