@@ -214,6 +214,11 @@ $document.ready(function () {
     // recommended tab
 
     var $getRecommendations = $('#get-recommendations');
+    var $recommendationsContainer = $('#recommendations-container');
+    var $noRecommendationsContainer = $('#no-recommendations-container');
+    var $startHere = $('#start-here');
+
+    selectRecommendationsTabView('no-recommendations');
 
     $getRecommendations.click(function () {
         $.ajax({
@@ -230,19 +235,42 @@ $document.ready(function () {
         })
     });
 
+    $startHere.click(function() {
+       selectTab('reference');
+    });
+
     function displayRecommendedMovies(recommendedMovies) {
         $recommendedMovieTableBody.empty();
 
+        var view = recommendedMovies.length > 0 ? 'has-recommendations' : 'no-recommendations';
+        selectRecommendationsTabView(view);
+
         for (var i = 0; i < recommendedMovies.length; i++) {
-            addRecommendedMovieRow(recommendedMovies[i]);
+            addRecommendedMovieRow(recommendedMovies[i], i + 1);
         }
     }
 
-    function addRecommendedMovieRow(movie) {
+    function selectRecommendationsTabView(view) {
+        if (view == 'has-recommendations') {
+            $recommendationsContainer.show();
+            $noRecommendationsContainer.hide();
+        } else {
+            $recommendationsContainer.hide();
+            $noRecommendationsContainer.show();
+        }
+    }
+
+    function addRecommendedMovieRow(movie, idx) {
         var movieName = movie.substring(0, movie.length - 7);
         var year = movie.substring(movie.length - 5, movie.length - 1);
 
         var $tr = $('<tr/>', {});
+        var $idxCell = $('<td/>', {});
+        $idxCell.append($('<div/>', {
+            text: idx
+        }));
+        $tr.append($idxCell);
+
         var $nameCell = $('<td/>', {});
         $nameCell.append($('<div/>', {
             class: 'name-cell',
@@ -255,6 +283,18 @@ $document.ready(function () {
             text: year
         }));
         $tr.append($yearCell);
+
+        var $detailsCell = $('<td/>', {});
+        var $detailsWrapper = $('<div/>', {});
+        $detailsWrapper.append($('<a/>', {
+            class: 'details-link',
+            text: 'Find on IMDb',
+            target: '_blank',
+            rel: 'noopener',
+            href: 'https://imdb.com/find?q=' + movie
+        }));
+        $detailsCell.append($detailsWrapper);
+        $tr.append($detailsCell);
 
         $recommendedMovieTableBody.append($tr);
     }

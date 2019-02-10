@@ -75,8 +75,14 @@
 
         .top-bar {
             height: 90px;
-            width: 100%;
             background-color: #2c3b62;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding-left: 90px;
+            padding-right: 90px;
         }
 
         .explanation-header {
@@ -278,6 +284,22 @@
             width: 20%;
         }
 
+        #recommendations-table td:nth-child(1), #recommendations-table th:nth-child(1) {
+            width: 10%;
+        }
+
+        #recommendations-table td:nth-child(2), #recommendations-table th:nth-child(2) {
+            width: 40%;
+        }
+
+        #recommendations-table td:nth-child(3), #recommendations-table th:nth-child(3) {
+            width: 25%;
+        }
+
+        #recommendations-table td:nth-child(4), #recommendations-table th:nth-child(4) {
+            width: 25%;
+        }
+
         th {
             background-color: #f7f7f7;
         }
@@ -327,12 +349,95 @@
         }
 
         #recommended-movies-container {
+            padding-top: 80px;
             padding-bottom: 50px;
+        }
+
+        #recommended-movies-container > h3 {
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1.4;
+            color: #2c3b62;
+
+            max-width: 700px;
+        }
+
+        .details-link {
+            width: 150px;
+            height: 35px;
+            border-radius: 4px;
+            border: 1px solid #2c3b62;
+
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            color: #2c3b62;
+
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #no-recommendations-container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .no-recommendations-img-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .no-recommendations-img-container > img {
+            width: 169px;
+        }
+
+        #no-recommendations-container > h3 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #2c3b62;
+            margin-top: 10px;
+        }
+
+        #no-recommendations-container > .explanation {
+            font-size: 18px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: center;
+            color: #2c3b62;
+            max-width: 520px;
+        }
+
+        #no-recommendations-container > button {
+            margin-top: 15px;
+            width: 100%;
+            max-width: 196px;
+        }
+
+        #banner-img {
+            width: 100%;
+            max-width: 106px;
+            margin-bottom: -20px;
+        }
+
+        #banner-text {
+            font-size: 18px;
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
-<div class="top-bar"></div>
+<div class="top-bar">
+    <img id="banner-img" alt="movies" th:src="@{/img/banner-header.png}"/>
+    <div id="banner-text">Film recommendations</div>
+</div>
 
 <div class="headers-row">
     <div id="reference-movies-header" class="tab-header selected">Films inputs</div>
@@ -397,20 +502,36 @@
 </div>
 
 <div id="recommended-movies-container" class="tab-container">
-    <table>
-        <thead>
-        <tr>
-            <th>
-                <div>Name</div>
-            </th>
-            <th>
-                <div>Year</div>
-            </th>
-        </tr>
-        </thead>
-        <tbody id="recommended-movies-table-body">
-        </tbody>
-    </table>
+    <div id="recommendations-container">
+        <h3>List of recommended films based on your preferences from the selection and TheMovieDB</h3>
+        <table id="recommendations-table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <div>Name</div>
+                </th>
+                <th>
+                    <div>Year</div>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="recommended-movies-table-body">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="no-recommendations-container">
+        <div class="no-recommendations-img-container">
+            <img alt="no recommendations" th:src="@{/img/no-recommendations.png}"/>
+        </div>
+        <h3>No recommendations yet.</h3>
+        <div class="explanation">In order to get them, select your favorite films from our system or import them from TheMovieDB
+            list you have already created.
+        </div>
+        <button id="start-here">Start here</button>
+    </div>
 </div>
 
 <div class="footer"></div>
