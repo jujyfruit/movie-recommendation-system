@@ -23,16 +23,16 @@ class TheMovieDbServiceImpl(private val client: RestTemplate = RestTemplate()) :
     val apiBaseUrl = "https://api.themoviedb.org/3"
     val websiteBaseUrl = "https://www.themoviedb.org"
 
-    override fun createRequestToken(): String {
+    override fun createRequestToken(): () -> String {
         val responseType = object : ParameterizedTypeReference<Map<String, String>>() {}
 
         val request = RequestEntity.get(
                 URI.create(getApiPath("/authentication/token/new")))
                 .accept(MediaType.APPLICATION_JSON).build()
 
-        val response = client.exchange(request, responseType).body ?: return ""
+        val response = client.exchange(request, responseType).body ?: return { "" }
 
-        return response["request_token"]!!
+        return { response["request_token"]!! }
     }
 
     override fun generateAllowAccessDetails(tokenProvider: () -> String): MovieDbAllowAccessDetails {
@@ -84,7 +84,6 @@ class TheMovieDbServiceImpl(private val client: RestTemplate = RestTemplate()) :
                 .accept(MediaType.APPLICATION_JSON).build()
 
         return client.exchange(request, responseType).body
-
     }
 
     private fun getAccountId(sessionId: String): Int? {
