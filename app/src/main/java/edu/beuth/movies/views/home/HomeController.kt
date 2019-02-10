@@ -25,7 +25,7 @@ class HomeController(private val movieRecommender: MovieRecommender,
 
     @GetMapping("/api/movies")
     @ResponseBody
-    fun movies(@RequestParam(name = "searchTerm") searchTerm: String, pageable: Pageable): Page<Movie> {
+    fun findMovies(@RequestParam(name = "searchTerm") searchTerm: String, pageable: Pageable): Page<Movie> {
         return movieService.findMovies(searchTerm, pageable)
     }
 

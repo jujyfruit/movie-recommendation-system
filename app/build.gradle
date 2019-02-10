@@ -19,11 +19,10 @@ buildscript {
 
         classpath group: 'com.palantir.gradle.gitversion', name: 'gradle-git-version', version: '0.5.3'
         classpath('com.bmuschko:gradle-docker-plugin:3.2.4')
-
-//		classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')
     }
 }
 
+apply plugin: 'groovy'
 apply plugin: 'scala'
 apply plugin: 'java'
 apply plugin: 'kotlin'
@@ -33,6 +32,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.google.protobuf'
+apply plugin: 'jacoco'
 
 group = 'edu.beuth'
 version = '0.0.1-SNAPSHOT'
@@ -77,25 +77,11 @@ dependencies {
 
     compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.8'
 
+    testCompile group: 'org.spockframework', name: 'spock-spring', version: '1.1-groovy-2.4'
+    testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
 }
 
 test.outputs.upToDateWhen { false }
-
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.5.1-1"
-    }
-    plugins {
-        grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.18.0'
-        }
-    }
-    generateProtoTasks {
-        all()*.plugins {
-            grpc {}
-        }
-    }
-}
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -109,9 +95,11 @@ sourceSets {
         kotlin {
             srcDirs = ['src/main/java']
         }
+    }
+}
 
-        scala {
-            srcDirs = ['src/main/java']
-        }
+jacocoTestReport {
+    reports {
+        xml.enabled true
     }
 }

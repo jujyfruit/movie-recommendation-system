@@ -16,11 +16,9 @@ import java.net.URI
 
 
 @Service
-class TheMovieDbServiceImpl : TheMovieDbService {
+class TheMovieDbServiceImpl(private val client: RestTemplate = RestTemplate()) : TheMovieDbService {
     @Value("\${themoviedb.apikey}")
     private val apiKey: String? = null
-
-    val client = RestTemplate()
 
     val apiBaseUrl = "https://api.themoviedb.org/3"
     val websiteBaseUrl = "https://www.themoviedb.org"
@@ -69,7 +67,7 @@ class TheMovieDbServiceImpl : TheMovieDbService {
     private fun collectAllFavouriteMovies(sessionId: String, accountId: Int?, movies: List<String>,
                                           totalPages: Int, page: Int): List<String> {
         if (page >= totalPages) {
-            return listOf()
+            return movies
         }
 
         val favouriteMoviesPaged = getFavouriteMoviesPaged(sessionId, accountId, page) ?: return movies

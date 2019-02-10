@@ -11,7 +11,7 @@ addons:
 
 script:
 - cd app
-- ./gradlew build -x test
+- ./gradlew build jacocoTestReport
 - cd ..
 - sonar-scanner
 - scp ./app/build/libs/movies-0.0.1-SNAPSHOT.jar ifki@$SERVER_IP_ADDRESS:/opt/movies-recommendation/app
