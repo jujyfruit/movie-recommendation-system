@@ -26,10 +26,8 @@ def find_mapped_movies(movies):
     return items[['movie title', 'movie id']].loc[items['movie title'].isin(movies)]['movie id'].tolist()
 
 
-def map_id_to_movies(movies):
-    i_cols = get_data_titles()
-    items = pd.read_csv('recommender/u.item', sep='|', names=i_cols, encoding='latin-1')
-    return items[['movie title', 'movie id']].loc[items['movie id'].isin(movies)]['movie title'].tolist()
+i_cols = get_data_titles()
+items = pd.read_csv('recommender/u.item', sep='|', names=i_cols, encoding='latin-1')
 
 class DataPreparator:
 
