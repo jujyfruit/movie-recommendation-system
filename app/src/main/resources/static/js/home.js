@@ -183,7 +183,7 @@ $document.ready(function () {
         var $iconCell = $('<td/>', {});
         var $iconCellDiv = $('<div/>', {});
         var $iconWrapper = $('<div/>', {class: 'icon-box small'});
-        var $iconCellDef = $('<img/>', {src: '/img/themoviedb-logo.png'});
+        var $iconCellDef = $('<img/>', {src: '/img/themoviedb-logo.png', alt: 'source image'});
         if (movie.source == 'system') {
             $iconCellDef = $('<i/>', {class: 'fas fa-film'});
         }
