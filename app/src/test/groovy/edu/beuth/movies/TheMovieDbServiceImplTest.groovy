@@ -13,7 +13,7 @@ import spock.lang.Specification
 
 class TheMovieDbServiceImplTest extends Specification {
 
-    TheMovieDbService service
+    TheMovieDbServiceImpl service
     RestTemplate mockClient
 
     def setup() {
@@ -32,7 +32,7 @@ class TheMovieDbServiceImplTest extends Specification {
 
         then:
         1 * mockClient.exchange(_, _) >> new ResponseEntity<Map<String, String>>(apiResponse, HttpStatus.OK)
-        result == token
+        result.invoke() == token
     }
 
     def "should generate allow access details"() {

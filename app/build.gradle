@@ -86,18 +86,6 @@ test.outputs.upToDateWhen { false }
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-sourceSets {
-    test {
-        java {
-            srcDirs = ['src/main/java', 'src/test/java']
-        }
-
-        kotlin {
-            srcDirs = ['src/main/java']
-        }
-    }
-}
-
 jacocoTestReport {
     reports {
         xml.enabled true

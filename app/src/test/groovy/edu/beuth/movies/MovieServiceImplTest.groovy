@@ -1,6 +1,5 @@
 package edu.beuth.movies
 
-import edu.beuth.movies.models.FavouriteMoviesResponse
 import edu.beuth.movies.models.Movie
 import edu.beuth.movies.repositories.MovieRepository
 import edu.beuth.movies.services.MovieService
@@ -33,5 +32,6 @@ class MovieServiceImplTest extends Specification {
                 new PageImpl<>(movies.collect {it -> new Movie(it, 1)})
         result.numberOfElements == movies.size()
         result.getContent().collect {s -> s.name} == movies
+        result.getContent().forEach { it.id == 1 }
     }
 }
