@@ -3,7 +3,6 @@ package edu.beuth.movies
 import edu.beuth.movies.models.FavouriteMoviesResponse
 import edu.beuth.movies.models.MovieDbAccount
 import edu.beuth.movies.models.MovieDetails
-import edu.beuth.movies.services.TheMovieDbService
 import edu.beuth.movies.services.impl.TheMovieDbServiceImpl
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpStatus
